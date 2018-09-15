@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        ul {
+            list-style: none
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            position: relative;
+            width: 1200px;
+            height: 400px;
+            margin: 50px auto;
+            border: 1px solid red;
+            overflow: hidden;
+        }
+
+        div li {
+            width: 1200px;
+            height: 400px;
+            /*float: left;*/
+            position: absolute;
+        }
+
+        div ul {
+            width: 1200px;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<script src="../jquery-1.12.4.min.js"></script>
+<script>
+    // 1.给每个li设置背景图片跟默认的left值
+    $('li').each(function (index, ele) {
+        $(this).css("left", index * 240).css('background', 'url(images/' + (index + 1) + '.jpg)')
+    });
+    // 2.给每个li设置鼠标移入事件
+    $('li').mouseover(function () {
+        var nowIndex = $(this).index();
+        // 显示迭代每个li,设置其left值
+        $('li').each(function (index, ele) {
+            if (index <= nowIndex) {
+                $(this).stop().animate({left: index * 100});
+            } else {
+                $(this).stop().animate({left: index * 100 + 700});
+            }
+        });
+    });
+    // 3.给每个li设置鼠标移出事件
+    $('li').mouseout(function () {
+        $('li').each(function (index, ele) {
+            $(this).stop().animate({left: index * 240});
+        });
+    });
+</script>
+</body>
+</html>
